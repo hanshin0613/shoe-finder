@@ -28,10 +28,11 @@ async function scrapeLinks() {
     if(links.length > Old.length){
         newLinksFound = links.filter(item=>!oldLinks.has(item))
         Old.push(...newLinksFound)
-        fs.writeFileSync('../links.json',JSON.stringify(Old))
+        const cleaned = Old.map(link => ({ 
+        link: link.replace('https://www.thehoopsgeek.com', '') 
+        }))
+        fs.writeFileSync('../links.json', JSON.stringify(cleaned))
     }
-    console.log(newLinksFound)
-    return newLinksFound
 }
 
 scrapeLinks();
