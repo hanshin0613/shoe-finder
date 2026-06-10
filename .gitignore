@@ -1,0 +1,5 @@
+.env
+node_modules/
+.next/
+links.json
+package.json

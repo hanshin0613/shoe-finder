@@ -1,0 +1,312 @@
+/* ==========================================================================
+   1. MAIN PAGE LAYOUT
+   ========================================================================== */
+body {
+  margin: 0;
+  height: 100vh; /* Lock height precisely to the viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Keeps your layout structure pushed down */
+  background-color: #2c4b9a;
+  padding-bottom: 40px; 
+  box-sizing: border-box;
+  overflow: hidden; /* Prevents the main window background from scrolling */
+}
+
+/* ==========================================================================
+   2. VERTICAL 2-COLUMN GRID CONTAINER
+   ========================================================================== */
+/* ==========================================================================
+   2. VERTICAL 2-COLUMN GRID CONTAINER
+   ========================================================================== */
+.card-list {
+  display: grid;
+  /* CHANGED: minmax(0, 1fr) prevents columns from overflowing when the screen shrinks */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  width: 90vw;
+  max-width: 620px;
+  padding: 20px; 
+  box-sizing: border-box;
+
+  /* --- CRUCIAL NEW CHANGES FOR INTERNAL SCROLLING --- */
+  max-height: 70vh;    
+  /* CHANGED: explicitly lock horizontal overflow to hidden, allow vertical scrolling */
+  overflow-x: hidden;  
+  overflow-y: auto;    
+  scroll-behavior: smooth; 
+  
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+
+  
+  /* Optional: Adds a clean retro inner border around the scroll menu workspace */
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.card-list::-webkit-scrollbar {
+  width: 8px;
+}
+.card-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* The moving handle part of the scrollbar */
+.card-list::-webkit-scrollbar-thumb {
+  background: #3c2580; /* Darker purple matching the tone */
+  border-radius: 4px;
+}
+
+.card-list::-webkit-scrollbar-thumb:hover {
+  background: #2b1860;
+}
+
+/* ==========================================================================
+   3. REPORT CARD STYLES
+   ========================================================================== */
+.card.report-card {
+  background-color: #fdfbf7; /* Off-white vintage ledger paper look */
+  border: 2px dashed #333; /* Dashed school report card border */
+  border-radius: 4px; /* Sharper corners like real paper document sheets */
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 0px #000; /* Retro hard flat shadow appearance */
+  min-height: 280px; /* Aligns card structural heights evenly */
+  white-space: normal;       /* Allows text to break naturally onto new lines */
+  word-break: break-word;    /* Dynamic fallback: breaks exceptionally long words safely */
+  overflow-wrap: break-word; /* Extra insurance for modern browsers */
+}
+
+/* Hover Mechanics */
+.card.report-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 6px 6px 0px #000;
+}
+
+/* ==========================================================================
+   4. CARD INNER ELEMENTS (HEADER, METRICS & STAMP)
+   ========================================================================== */
+/* Header Layout Block */
+.card-header {
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Typewriter Academic Heading */
+.card-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: #040000;
+  text-transform: uppercase;
+  white-space: normal; /* Permits long shoe titles to wrap to a new line safely */
+}
+
+/* Angled Validation Stamp Badge */
+.card-stamp {
+  font-size: 0.7rem;
+  border: 2px solid #d9534f;
+  color: #d9534f;
+  padding: 2px 6px;
+  font-weight: bold;
+  border-radius: 4px;
+  transform: rotate(-5deg);
+  font-family: Arial, sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Structured Metrics Rows Stack */
+.card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+/* Dotted Spread Sheet Metric Line */
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  border-bottom: 1px dotted #ccc; 
+  padding-bottom: 2px;
+}
+
+.label {
+  font-weight: bold;
+  color: #555;
+}
+
+.value {
+  font-weight: bold;
+  color: #000;
+}
+
+/* ==========================================================================
+   5. CARD FOOTER SECTION
+   ========================================================================== */
+.card-notes {
+  margin-top: 12px;
+  border-top: 1px solid #333;
+  padding-top: 8px;
+  font-size: 0.8rem;
+  color: #444;
+  line-height: 1.4;
+  font-family: Arial, sans-serif;
+}
+
+.card-notes p {
+  margin: 2px 0;
+}
+
+/* Optional Fallback Message Style */
+.no-data {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MOBILE MEDIA QUERY
+   ========================================================================== */
+@media (max-width: 500px) {
+  .card-list {
+    grid-template-columns: 1fr; /* Collapses into 1 clean column layout on thin phones */
+    gap: 16px;
+  }
+}
+/* 4. Textbox Positioning */
+.textbox-container {
+  width: 100%;
+  max-width: 620px;       /* Keeps it aligned with your cards width */
+  display: flex;
+  flex-direction: row;    /* Explicitly forces side-by-side alignment */
+  justify-content: center;
+  align-items: center;    /* Keeps their vertical midpoints perfectly lined up */
+  gap: 12px;              /* Puts a clean space between the input and the button */
+  margin-top: 20px;
+}
+
+.textbox {
+  box-sizing: border-box; 
+  height: 50px;           /* FIXED: Synchronized with the button */
+  flex-grow: 1;           /* Allows the textbox to expand and fill available row space */
+  padding: 10px 14px;
+  line-height: 1.4;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  border: 2px solid #000000; 
+  border-radius: 8px;
+  background-color: transparent; 
+  color: #ffffff;
+  resize: none;
+}
+
+.textbox:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+/* ==========================================================================
+   7. BRANDING FOOTER LOGO
+   ========================================================================== */
+.brand-logo {
+  position: fixed;
+  bottom: 16px;              /* Distance from the bottom edge */
+  right: 20px;               /* Distance from the right edge */
+  
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  
+  /* Translucent white using rgba (Red, Green, Blue, Alpha transparency) */
+  color: rgba(255, 255, 255, 0.45); 
+  
+  user-select: none;         /* Prevents accidental text-highlight dragging */
+  pointer-events: none;      /* Ensures clicks pass right through it if it overlaps anything */
+  z-index: 10;               /* Keeps it sitting cleanly above background layers */
+}
+
+/* Optional stylistic distinction for the actual name "HoopsGeek" */
+.brand-highlight {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.65); /* Slightly brighter white for emphasis */
+}
+
+
+
+/* ==========================================================================
+   6. SEARCH BUTTON STYLES
+   ========================================================================== */
+#searchbutton {
+  box-sizing: border-box; 
+  height: 50px;           /* FIXED: Now matches the textbox perfectly */
+  padding: 0 20px;        
+  flex-shrink: 0;         /* Prevents the button from being squished by flexbox */
+  
+  display: inline-flex;   
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ff9800;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #000000;
+  white-space: nowrap;
+  
+  /* Smooth hover transitions */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Mechanics (Optional but keeps your retro pop effect intact!) */
+#searchbutton:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px #000000;
+}
+
+/* Active State (Gives visual feedback when clicked) */
+#searchbutton:active {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0px #000000;
+}
+  
+/* Container to pull the textbox and button side-by-side */
+.search-container {
+  display: flex;
+  flex-direction: row;
+  /* Aligns their structural midpoints perfectly */
+  align-items: center; 
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 620px;
+  margin-top: 20px;
+}
+
+/* Optional: Ensures your button doesn't shrink or squash if the text box expands */
+#searchbutton {
+  flex-shrink: 0;
+  white-space: nowrap; /* Prevents button text from breaking into two lines */
+}
+
