@@ -1,0 +1,33 @@
+name: Monthly Shoe Scraper
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'  # runs 1st of every month
+  workflow_dispatch:       # allows manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Link Checker
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+        run: node LinkChecker.js
+
+      - name: Run Page Scraper
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+        run: node PageScraper.js
