@@ -1,0 +1,28 @@
+{
+  "name": "shoe-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@types/pg": "^8.20.0",
+    "@vercel/postgres": "^0.10.0",
+    "axios": "^1.15.2",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "groq-sdk": "^1.1.2",
+    "next": "^16.2.6",
+    "pg": "^8.20.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}
