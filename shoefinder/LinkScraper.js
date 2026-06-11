@@ -40,7 +40,7 @@ async function scrapeLinks() {
         fs.writeFileSync('../links.json', JSON.stringify(cleaned))
         await client.connect()
         await Promise.all(cleaned.map(link=>{
-            return client.query(`INSERT INTO links(link) VALUES($1) ON CONFLICT(link) DO NOTHING`,[link])
+            return client.query(`INSERT INTO links(link) VALUES($1) ON CONFLICT(link) DO NOTHING`,[link.link])
         }))
         client.end()
     }
