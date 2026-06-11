@@ -169,15 +169,14 @@ async function main(existingNames, rows){
 async function repeat(){
     await client.connect()
     //if somehow links.json doesnt exist anymore
-    if(!fs.existsSync('../shoefinder/links.json')){
+    if(!fs.existsSync('../links.json')){
     // query supabase and save to file
     stuff = await client.query(`SELECT link FROM links`)
     rows = stuff.rows
-    console.log(`${process.cwd()}`);
-    fs.writeFileSync('../shoefinder/links.json', JSON.stringify(rows))
+    fs.writeFileSync('../links.json', JSON.stringify(rows))
     }
    
-    rows = JSON.parse(fs.readFileSync('../shoefinder/links.json', 'utf8'))
+    rows = JSON.parse(fs.readFileSync('../links.json', 'utf8'))
     const existingResult = await client.query(`SELECT name FROM shoes`)
     const existingNames = new Set(existingResult.rows.map(row => row.name))
     
