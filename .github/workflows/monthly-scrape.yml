@@ -24,12 +24,14 @@ jobs:
         run: npm install
 
       - name: Run Link Checker
+        working-directory: ./shoefinder
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
         run: node LinkScraper.js
 
       - name: Run Page Scraper
+        working-directory: ./shoefinder
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
