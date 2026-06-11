@@ -173,7 +173,7 @@ async function repeat(){
     // query supabase and save to file
     stuff = await client.query(`SELECT link FROM links`)
     rows = stuff.rows
-    console.log('process.cwd()');
+    console.log(`${process.cwd()}`);
     fs.writeFileSync('../shoefinder/links.json', JSON.stringify(rows))
     }
    
