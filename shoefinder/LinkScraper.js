@@ -1,6 +1,12 @@
+require('dotenv').config()
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const { Client } = require('pg')
+const client = new Client({ connectionString: process.env.POSTGRES_URL_NON_POOLING,
+    ssl: { rejectUnauthorized: false }
+ })
 
 async function scrapeLinks() {
     const page = await axios.get("https://www.thehoopsgeek.com/page-sitemap.xml");
@@ -32,7 +38,15 @@ async function scrapeLinks() {
         link: link.replace('https://www.thehoopsgeek.com', '') 
         }))
         fs.writeFileSync('../links.json', JSON.stringify(cleaned))
+        await client.connect()
+        await Promise.all(cleaned.map(link=>{
+            return client.query(`INSERT INTO links(link) VALUES($1) ON CONFLICT (link) DO NOTHING`,[link])
+        }))
+        client.end()
     }
 }
 
-scrapeLinks();
+async function main(){
+    await scrapeLinks()
+}
+main()

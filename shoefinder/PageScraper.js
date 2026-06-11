@@ -169,7 +169,7 @@ async function main(existingNames, rows){
 async function repeat(){
     await client.connect()
     //if somehow links.json doesnt exist anymore
-    if(!fs.existsSync('./links.json')){
+    if(!fs.existsSync('../links.json')){
     // query supabase and save to file
     stuff = await client.query(`SELECT link FROM links`)
     rows = stuff.rows
