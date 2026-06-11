@@ -27,7 +27,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
-        run: node LinkChecker.js
+        run: node LinkScraper.js
 
       - name: Run Page Scraper
         env:
