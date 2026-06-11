@@ -173,10 +173,10 @@ async function repeat(){
     // query supabase and save to file
     stuff = await client.query(`SELECT link FROM links`)
     rows = stuff.rows
-    fs.writeFileSync('links.json', JSON.stringify(rows))
+    fs.writeFileSync('../links.json', JSON.stringify(rows))
     }
    
-    rows = JSON.parse(fs.readFileSync('links.json', 'utf8'))
+    rows = JSON.parse(fs.readFileSync('../links.json', 'utf8'))
     const existingResult = await client.query(`SELECT name FROM shoes`)
     const existingNames = new Set(existingResult.rows.map(row => row.name))
     
